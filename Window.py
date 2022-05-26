@@ -68,7 +68,10 @@ def run_window():
 if __name__ == '__main__':
     # making a window
     window = Window()
-    input = window.joystick
+    try:
+        input = window.joystick
+    except AttributeError:
+        input = input
 
     input_process = multiprocessing.Process(target=inputhandler.main)
     window_process = multiprocessing.Process(target=window.mainloop)
