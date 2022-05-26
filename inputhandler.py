@@ -70,7 +70,8 @@ class JoystickI(object):
         try:
             self.gamepad = inputs.devices.gamepads[0]
         except IndexError:
-            raise inputs.UnpluggedError("No gamepad found.")
+            # raise inputs.UnpluggedError("No gamepad found.")
+            print("No GamePad Found")
 
     def handle_unknown_event(self, event, key):
         """Deal with unknown events."""
@@ -146,6 +147,8 @@ class JoystickI(object):
         try:
             events = self.gamepad.read()
         except EOFError:
+            events = []
+        except AttributeError:
             events = []
         for event in events:
             self.process_event(event)
